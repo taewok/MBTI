@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 
 const Home = () => {
@@ -10,6 +11,9 @@ const Home = () => {
           MBTI 검사하기
           <CloudImg src="cloud.png" />
         </Title>
+        <MoveBtn>
+          <Link to={"/question"}>검사하기</Link>
+        </MoveBtn>
       </Wrap>
     </Container>
   );
@@ -36,13 +40,21 @@ const RightCloud = keyframes`
   }
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100vw;
+  height: 100%;
+  background-color: #f19100;
+`;
 const Wrap = styled.div`
-  padding-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25vh;
 `;
 const Title = styled.h1`
   position: relative;
-  color: #EFEFEF;
+  color: #efefef;
+  font-family: "SDSamliphopangche_Outline";
   font-size: 3.5rem;
 `;
 const CloudImg = styled.img`
@@ -57,13 +69,31 @@ const CloudImg = styled.img`
           animation: ${LeftCloud} 1.5s linear forwards;
         `
       : css`
-          z-index: -4;
           top: -70px;
           left: 100%;
           width: 450px;
           transform: rotateY(180deg);
           animation: ${RightCloud} 2s forwards ease;
         `}
+`;
+
+const MoveBtn = styled.button`
+  margin-top: 200px;
+  padding: 10px 25px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: #000000;
+  font-size: 1rem;
+  font-family: "GmarketSansMedium";
+  cursor: pointer;
+  &:hover {
+    border: 3px dashed white;
+  }
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
 `;
 
 export default Home;
