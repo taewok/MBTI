@@ -39,6 +39,26 @@ const RightCloud = keyframes`
     left: 50%;
   }
 `;
+const LineAnimation1 = keyframes`
+  0%{
+    top: 0;
+    opacity: 0;
+  }
+  100%{
+    top: 13vh;
+    opacity: 0.8;
+  }
+`
+const LineAnimation2 = keyframes`
+  0%{
+    left: 0;
+    opacity: 0;
+  }
+  100%{
+    left: 15vw;
+    opacity: 0.8;
+  }
+`
 
 const Container = styled.div`
   width: 100vw;
@@ -46,10 +66,30 @@ const Container = styled.div`
   background-color: #f19100;
 `;
 const Wrap = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 25vh;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 3px;
+    background-color: #444444;
+    animation: ${LineAnimation1} 1s ease-in forwards;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 3px;
+    height: 100vh;
+    background-color: #444444;
+    animation: ${LineAnimation2} 1s ease-in forwards;
+  }
 `;
 const Title = styled.h1`
   position: relative;
