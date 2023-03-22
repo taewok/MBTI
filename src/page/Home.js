@@ -48,7 +48,7 @@ const LineAnimation1 = keyframes`
     top: 13vh;
     opacity: 0.8;
   }
-`
+`;
 const LineAnimation2 = keyframes`
   0%{
     left: 0;
@@ -58,7 +58,7 @@ const LineAnimation2 = keyframes`
     left: 15vw;
     opacity: 0.8;
   }
-`
+`;
 
 const Container = styled.div`
   width: 100vw;
@@ -75,7 +75,7 @@ const Wrap = styled.div`
     content: "";
     position: absolute;
     top: 0;
-    left:0;
+    left: 0;
     width: 100%;
     height: 3px;
     background-color: #444444;

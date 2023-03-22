@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Question = () => {
   const navigate = useNavigate();
@@ -98,17 +98,89 @@ const Question = () => {
     },
   ];
 
+  const OptionOnClick = (value) => {
+    console.log(value);
+  };
+
   return (
     <Container>
+      <ProgressNum>{num}/12</ProgressNum>
+      <Progress progress={1}></Progress>
       <Section>
-        <QuestionText>Q, {questionList[num].question}</QuestionText>
+        <QuestionNum>Q,{num}</QuestionNum>
+        <QuestionText>{questionList[num].question}?</QuestionText>
+        <Option onClick={() => OptionOnClick(questionList[num].Q1Value)}>
+          <span>{questionList[num].Q1}</span>
+        </Option>
+        <Option onClick={() => OptionOnClick(questionList[num].Q2Value)}>
+          <span>{questionList[num].Q2}</span>
+        </Option>
       </Section>
     </Container>
   );
 };
 
+const OptionAnimation = keyframes`
+  0%{
+    opacity: 0;
+    transform: translateY(80%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0%);
+  }
+`;
+
 const Container = styled.div``;
-const Section = styled.section``;
-const QuestionText = styled.div``;
+const Section = styled.section`
+  padding-top: 15vh;
+`;
+const ProgressNum = styled.h5`
+  text-align: right;
+  padding-top: 5vh;
+`;
+const Progress = styled.div`
+  position: relative;
+  height: 20px;
+  background-color: #dadada;
+  border-radius: 15px;
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: calc(100% / 12 * ${(props) => props.progress});
+    height: 100%;
+    background-color: #00ae2c;
+    border-radius: 15px;
+  }
+`;
+const QuestionNum = styled.h1`
+  padding-bottom: 30px;
+  text-align: center;
+  font-size: 2rem;
+`;
+const QuestionText = styled.div`
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: under;
+  font-size: 1.5rem;
+`;
+const Option = styled.div`
+  margin-top: 60px;
+  padding: 25px 30px;
+  width: 500px;
+  background-color: #fb5799;
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  animation: ${OptionAnimation} 1s forwards;
+  cursor: pointer;
+  &:hover {
+    background-color: #ed0562;
+  }
+`;
 
 export default Question;
