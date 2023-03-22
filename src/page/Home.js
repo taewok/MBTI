@@ -12,7 +12,7 @@ const Home = () => {
           <CloudImg src="cloud.png" />
         </Title>
         <MoveBtn>
-          <Link to={"/question"}>검사하기</Link>
+          <Link to={"/question/1"}>검사하기</Link>
         </MoveBtn>
       </Wrap>
     </Container>
