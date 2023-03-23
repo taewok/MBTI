@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import styled, { keyframes } from "styled-components";
 
 const Question = () => {
+  const location = useLocation();
   const navigate = useNavigate();
 
   const [num, setNum] = useState(1);
+  //질문 하나하나에 mbti 성향을 기록
+  const [mbtiList, setMbtiList] = useState([]);
+  //최종적인 mbti 기록
+  const [mbti, setMbti] = useState("");
 
   useEffect(() => {
-    navigate(`/question/${num}`);
-  }, [navigate, num]);
+    const pageNum = location.pathname.split("/");
+    navigate(`/question/${pageNum[pageNum.length - 1]}`);
+    setNum(Number(pageNum[pageNum.length - 1]));
+  }, [num]);
 
   const questionList = [
     {
@@ -99,21 +106,63 @@ const Question = () => {
   ];
 
   const OptionOnClick = (value) => {
-    console.log(value);
+    mbtiList.push(value);
+    navigate(`/question/${num + 1}`);
+    setNum(num + 1);
+
+    let str = 0;
+    // I성향인지 E성향인지 판별
+    if (num / 3 === 1) {
+      for (let i = 0; i < 3; i++) {
+        if (mbtiList[i] === "E") str += 1;
+      }
+      if (str >= 2) setMbti((value) => value + "E");
+      else setMbti("I");
+      str = 0;
+    }
+    // S성향인지 N성향인지 판별
+    if (num / 3 === 2) {
+      for (let i = 0; i < 3; i++) {
+        if (mbtiList[i] === "S") str += 1;
+      }
+      if (str >= 2) setMbti((value) => value + "S");
+      else setMbti((value) => value + "N");
+      str = 0;
+    }
+    // F성향인지 F성향인지 판별
+    if (num / 3 === 3) {
+      for (let i = 0; i < 3; i++) {
+        if (mbtiList[i] === "F") str += 1;
+      }
+      if (str >= 2) setMbti((value) => value + "F");
+      else setMbti((value) => value + "P");
+      str = 0;
+    }
+    // J성향인지 P성향인지 판별
+    if (num / 3 === 4) {
+      for (let i = 0; i < 3; i++) {
+        if (mbtiList[i] === "J") str += 1;
+      }
+      if (str >= 2) setMbti((value) => value + "J");
+      else setMbti((value) => value + "P");
+      str = 0;
+    }
+
+    if (num === 12) navigate(`/question/result`);
   };
 
   return (
     <Container>
       <ProgressNum>{num}/12</ProgressNum>
-      <Progress progress={1}></Progress>
+      <Progress progress={num}></Progress>
       <Section>
         <QuestionNum>Q,{num}</QuestionNum>
-        <QuestionText>{questionList[num].question}?</QuestionText>
-        <Option onClick={() => OptionOnClick(questionList[num].Q1Value)}>
-          <span>{questionList[num].Q1}</span>
+        <QuestionText>{questionList[num - 1].question}?</QuestionText>
+        <Option onClick={() => OptionOnClick(questionList[num - 1].Q1Value)}>
+          <span>{questionList[num - 1].Q1}</span>
         </Option>
-        <Option onClick={() => OptionOnClick(questionList[num].Q2Value)}>
-          <span>{questionList[num].Q2}</span>
+        <Option onClick={() => OptionOnClick(questionList[num - 1].Q2Value)}>
+          <span>{questionList[num - 1].Q2}</span>
         </Option>
       </Section>
     </Container>
