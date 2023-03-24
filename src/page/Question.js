@@ -9,8 +9,6 @@ const Question = () => {
   const [num, setNum] = useState(1);
   //질문 하나하나에 mbti 성향을 기록
   const [mbtiList, setMbtiList] = useState([]);
-  //최종적인 mbti 기록
-  const [mbti, setMbti] = useState("");
 
   useEffect(() => {
     const pageNum = location.pathname.split("/");
@@ -107,54 +105,21 @@ const Question = () => {
 
   const OptionOnClick = (value) => {
     mbtiList.push(value);
-    navigate(`/question/${num + 1}`);
     setNum(num + 1);
 
-    let str = 0;
-    // I성향인지 E성향인지 판별
-    if (num / 3 === 1) {
-      for (let i = 0; i < 3; i++) {
-        if (mbtiList[i] === "E") str += 1;
-      }
-      if (str >= 2) setMbti((value) => value + "E");
-      else setMbti("I");
-      str = 0;
-    }
-    // S성향인지 N성향인지 판별
-    if (num / 3 === 2) {
-      for (let i = 0; i < 3; i++) {
-        if (mbtiList[i] === "S") str += 1;
-      }
-      if (str >= 2) setMbti((value) => value + "S");
-      else setMbti((value) => value + "N");
-      str = 0;
-    }
-    // F성향인지 F성향인지 판별
-    if (num / 3 === 3) {
-      for (let i = 0; i < 3; i++) {
-        if (mbtiList[i] === "F") str += 1;
-      }
-      if (str >= 2) setMbti((value) => value + "F");
-      else setMbti((value) => value + "P");
-      str = 0;
-    }
-    // J성향인지 P성향인지 판별
-    if (num / 3 === 4) {
-      for (let i = 0; i < 3; i++) {
-        if (mbtiList[i] === "J") str += 1;
-      }
-      if (str >= 2) setMbti((value) => value + "J");
-      else setMbti((value) => value + "P");
-      str = 0;
-    }
-
-    if (num === 12) navigate(`/question/result`);
+    //마지막 질문 클릭시 결과 페이지로 이동
+    if (num === 12)
+      navigate(`/question/result`, { state: { mbtiList: mbtiList } });
+    else navigate(`/question/${num + 1}`);
   };
 
   return (
     <Container>
       <ProgressNum>{num}/12</ProgressNum>
       <Progress progress={num}></Progress>
+      <ImgBox>
+        <ReferenceImg src={`/images/참고${num}.jpg`} />
+      </ImgBox>
       <Section>
         <QuestionNum>Q,{num}</QuestionNum>
         <QuestionText>{questionList[num - 1].question}?</QuestionText>
@@ -180,9 +145,11 @@ const OptionAnimation = keyframes`
   }
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 560px;
+`;
 const Section = styled.section`
-  padding-top: 15vh;
+  padding-top: 5vh;
 `;
 const ProgressNum = styled.h5`
   text-align: right;
@@ -205,6 +172,16 @@ const Progress = styled.div`
     border-radius: 15px;
   }
 `;
+
+const ImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 5vh;
+`;
+const ReferenceImg = styled.img`
+  width: 300px;
+`;
+
 const QuestionNum = styled.h1`
   padding-bottom: 30px;
   text-align: center;
@@ -218,8 +195,8 @@ const QuestionText = styled.div`
 `;
 const Option = styled.div`
   margin-top: 60px;
-  padding: 25px 30px;
-  width: 500px;
+  padding: 25px 0px;
+  width: 100%;
   background-color: #fb5799;
   border-radius: 15px;
   color: white;
