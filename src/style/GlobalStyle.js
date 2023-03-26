@@ -21,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         justify-content: center;
         height:100vh;
-        overflow: hidden;
     }
 `;
 
