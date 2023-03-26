@@ -300,50 +300,21 @@ const Result = () => {
     },
   ];
 
+  //mbtiList를 기준으로 가장 강한 성향을 기준으로 4글자로 축약
   useEffect(() => {
-    let str = 0;
-    for (let num = 0; num <= 12; num += 3) {
-      // I성향인지 E성향인지 판별
-      if (num / 3 === 1) {
-        for (let i = 0; i < 3; i++) {
-          if (mbtiList[i] === "E") str += 1;
-        }
-        if (str >= 2) setMbti((value) => value + "E");
-        else setMbti("I");
-        str = 0;
-      }
-      // S성향인지 N성향인지 판별
-      if (num / 3 === 2) {
-        for (let i = 0; i < 3; i++) {
-          if (mbtiList[i] === "S") str += 1;
-        }
-        if (str >= 2) setMbti((value) => value + "S");
-        else setMbti((value) => value + "N");
-        str = 0;
-      }
-      // F성향인지 T성향인지 판별
-      if (num / 3 === 3) {
-        for (let i = 0; i < 3; i++) {
-          if (mbtiList[i] === "F") str += 1;
-        }
-        if (str >= 2) setMbti((value) => value + "F");
-        else setMbti((value) => value + "T");
-        str = 0;
-      }
-      // J성향인지 P성향인지 판별
-      if (num / 3 === 4) {
-        for (let i = 0; i < 3; i++) {
-          if (mbtiList[i] === "J") str += 1;
-        }
-        if (str >= 2) setMbti((value) => value + "J");
-        else setMbti((value) => value + "P");
-        str = 0;
+    while (mbtiList.length > 0) {
+      const List = mbtiList.splice(0, 3);
+      if (List[0] === List[1]) {
+        setMbti((value) => (value += List[0]));
+      } else if (List[0] === List[2]) {
+        setMbti((value) => (value += List[0]));
+      } else if (List[1] === List[2]) {
+        setMbti((value) => (value += List[1]));
       }
     }
-  }, []);
+  }, [mbti, mbtiList]);
 
   useEffect(() => {
-    console.log(mbti);
     mbti &&
       console.log(mbtiExplainList.filter((array) => array.mbti === mbti)[0]);
     mbti &&
@@ -358,10 +329,10 @@ const Result = () => {
           <Section>
             <MbtiImg src={`/images/${mbti}.svg`} />
             <MbtiExplain color={`${mbtiInfo.color}`}>
-              <span>
+              <p>
                 <b>당신은</b>
-              </span>
-              {mbtiInfo.text}
+                <span>{mbtiInfo.text}</span>
+              </p>
               <PointList color={`${mbtiInfo.color}`}>
                 {mbtiInfo.point.map((value, index) => (
                   <PointItem key={index}>{value}</PointItem>
@@ -379,7 +350,7 @@ const Container = styled.div`
   width: 560px;
 `;
 const Wrap = styled.div`
-  padding-top: 10vh;
+  padding-top: 5vh;
   width: 100%;
 `;
 const Section = styled.section`
@@ -391,25 +362,31 @@ const Section = styled.section`
 
 const MbtiTitle = styled.h1`
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 4rem;
 `;
 const MbtiImg = styled.img`
   margin-top: 50px;
   width: 100%;
 `;
 const MbtiExplain = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 4vh;
-  padding: 25px 30px;
-  width: 80%;
-  border: 7px solid ${(props) => props.color};
+  padding: 15px 30px;
+  width: 100%;
+  border: 5px solid ${(props) => props.color};
   border-radius: 15px;
   span {
+    border-bottom: 3px solid ${(props) => props.color};
+  }
+  b {
     margin-right: 10px;
     font-size: 1.4rem;
   }
 `;
 const PointList = styled.ul`
-  padding: 10px;
+  padding: 0;
   font-size: 1rem;
   li::marker {
     color: ${(props) => props.color};
@@ -417,7 +394,8 @@ const PointList = styled.ul`
   }
 `;
 const PointItem = styled.li`
-  padding: 5px;
+  padding: 5px 0;
+  line-height: 34px;
 `;
 
 export default Result;
