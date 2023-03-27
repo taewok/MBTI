@@ -147,6 +147,9 @@ const OptionAnimation = keyframes`
 
 const Container = styled.div`
   width: 560px;
+  @media (max-width: 660px) {
+    width: 90vw;
+  }
 `;
 const Section = styled.section`
   padding-top: 5vh;
@@ -183,7 +186,7 @@ const ReferenceImg = styled.img`
 `;
 
 const QuestionNum = styled.h1`
-  padding-bottom: 30px;
+  padding-bottom: 5vh;
   text-align: center;
   font-size: 2rem;
 `;
@@ -192,9 +195,12 @@ const QuestionText = styled.div`
   text-decoration: underline;
   text-underline-position: under;
   font-size: 1.5rem;
+  @media (max-width: 660px) {
+    font-size: 1.2rem;
+  }
 `;
 const Option = styled.div`
-  margin-top: 60px;
+  margin-top: 5vh;
   padding: 25px 0px;
   width: 100%;
   background-color: #fb5799;
@@ -206,6 +212,11 @@ const Option = styled.div`
   cursor: pointer;
   &:hover {
     background-color: #ed0562;
+  }
+  @media (max-width: 660px) {
+    padding: 20px 15px;
+    width: calc(100% - 30px);
+    font-size: 1rem;
   }
 `;
 

@@ -348,6 +348,9 @@ const Result = () => {
 
 const Container = styled.div`
   width: 560px;
+  @media (max-width: 660px) {
+    width: 90vw;
+  }
 `;
 const Wrap = styled.div`
   padding-top: 5vh;
@@ -384,9 +387,12 @@ const MbtiExplain = styled.div`
     margin-right: 10px;
     font-size: 1.4rem;
   }
+  @media (max-width: 660px) {
+    width: calc(100% - 60px);
+  }
 `;
 const PointList = styled.ul`
-  padding: 0;
+  padding: 10px 0;
   font-size: 1rem;
   li::marker {
     color: ${(props) => props.color};
@@ -395,7 +401,7 @@ const PointList = styled.ul`
 `;
 const PointItem = styled.li`
   padding: 5px 0;
-  line-height: 34px;
+  line-height: 18px;
 `;
 
 export default Result;
