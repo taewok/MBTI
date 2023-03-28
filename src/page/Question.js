@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import styled, { keyframes } from "styled-components";
+import PrevNextBtn from "../components/Result/PrevNextBtn";
 
 const Question = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const Question = () => {
     const pageNum = location.pathname.split("/");
     navigate(`/question/${pageNum[pageNum.length - 1]}`);
     setNum(Number(pageNum[pageNum.length - 1]));
-  }, [num]);
+  }, [location.pathname, navigate, num]);
 
   const questionList = [
     {
@@ -119,6 +120,7 @@ const Question = () => {
       <Progress progress={num}></Progress>
       <ImgBox>
         <ReferenceImg src={`/images/참고${num}.jpg`} />
+        <PrevNextBtn pageNum={num} mbtiList={mbtiList} setMbtiList={setMbtiList}/>
       </ImgBox>
       <Section>
         <QuestionNum>Q,{num}</QuestionNum>
@@ -177,6 +179,7 @@ const Progress = styled.div`
 `;
 
 const ImgBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   padding-top: 5vh;
