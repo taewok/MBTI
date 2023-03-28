@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import ResultBtn from "../components/Result/ResultBtn";
 
 const Result = () => {
   const location = useLocation();
@@ -339,6 +340,7 @@ const Result = () => {
                 ))}
               </PointList>
             </MbtiExplain>
+            <ResultBtn />
           </Section>
         </Wrap>
       )}
