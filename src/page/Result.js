@@ -317,8 +317,6 @@ const Result = () => {
 
   useEffect(() => {
     mbti &&
-      console.log(mbtiExplainList.filter((array) => array.mbti === mbti)[0]);
-    mbti &&
       setMbtiInfo(mbtiExplainList.filter((array) => array.mbti === mbti)[0]);
   }, [mbti]);
 
@@ -330,10 +328,10 @@ const Result = () => {
           <Section>
             <MbtiImg src={`/images/${mbti}.svg`} />
             <MbtiExplain color={`${mbtiInfo.color}`}>
-              <p>
+              <ExplainTitle color={`${mbtiInfo.color}`}>
                 <b>당신은</b>
                 <span>{mbtiInfo.text}</span>
-              </p>
+              </ExplainTitle>
               <PointList color={`${mbtiInfo.color}`}>
                 {mbtiInfo.point.map((value, index) => (
                   <PointItem key={index}>{value}</PointItem>
@@ -382,6 +380,11 @@ const MbtiExplain = styled.div`
   width: 100%;
   border: 5px solid ${(props) => props.color};
   border-radius: 15px;
+  @media (max-width: 660px) {
+    width: calc(100% - 60px);
+  }
+`;
+const ExplainTitle = styled.div`
   span {
     border-bottom: 3px solid ${(props) => props.color};
   }
@@ -390,7 +393,9 @@ const MbtiExplain = styled.div`
     font-size: 1.4rem;
   }
   @media (max-width: 660px) {
-    width: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
   }
 `;
 const PointList = styled.ul`
