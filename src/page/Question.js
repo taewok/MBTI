@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import styled, { keyframes } from "styled-components";
-import PrevNextBtn from "../components/Result/PrevNextBtn";
+import PrevBtn from "../components/Result/PrevBtn";
 
 const Question = () => {
   const location = useLocation();
@@ -120,7 +120,11 @@ const Question = () => {
       <Progress progress={num}></Progress>
       <ImgBox>
         <ReferenceImg src={`/images/참고${num}.jpg`} />
-        <PrevNextBtn pageNum={num} mbtiList={mbtiList} setMbtiList={setMbtiList}/>
+        <PrevBtn
+          pageNum={num}
+          mbtiList={mbtiList}
+          setMbtiList={setMbtiList}
+        />
       </ImgBox>
       <Section>
         <QuestionNum>Q,{num}</QuestionNum>
