@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import styled, { keyframes } from "styled-components";
-import PrevBtn from "../components/Result/PrevBtn";
+import PrevBtn from "../components/Question/PrevBtn";
 
 const Question = () => {
   const location = useLocation();
