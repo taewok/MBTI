@@ -78,7 +78,7 @@ const Wrap = styled.div`
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: #444444;
+    background-color: #202020;
     animation: ${LineAnimation1} 1s ease-in forwards;
   }
   &::before {
@@ -87,7 +87,7 @@ const Wrap = styled.div`
     top: 0;
     width: 3px;
     height: 100vh;
-    background-color: #444444;
+    background-color: #202020;
     animation: ${LineAnimation2} 1s ease-in forwards;
   }
 `;
