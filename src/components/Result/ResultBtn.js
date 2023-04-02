@@ -22,6 +22,7 @@ const Container = styled.div`
 const AgainBtn = styled.button`
   width: 170px;
   height: 40px;
+  background-color: transparent;
   border: 2px solid #aaaaaa;
   border-radius: 5px;
   transition: all 0.3s;
