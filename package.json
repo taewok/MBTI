@@ -21,6 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://taewok-mbti-test.netlify.app",
   "eslintConfig": {
     "extends": [
       "react-app",
